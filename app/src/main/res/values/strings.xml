@@ -1,3 +1,8 @@
 <resources>
-    <string name="app_name">MovieApp</string>
+    <string name="app_name">Movie App</string>
+    <string name="search_hint">Search Movie</string>
+    <string name="item_not_avaliable">Item not available!</string>
+    <string name="movies">Movies</string>
+    <string name="popular">Popular</string>
+
 </resources>
