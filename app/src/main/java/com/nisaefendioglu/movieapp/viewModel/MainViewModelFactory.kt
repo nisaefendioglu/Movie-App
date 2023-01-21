@@ -8,9 +8,10 @@ class MainViewModelFactory(
     private val repository: MovieRepository,
     private val search: String,
     private val page: Int,
-    private val type: String) : ViewModelProvider.Factory {
+    private val type: String
+) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return MainViewModel(repository,search,page,type) as T
+        return MainViewModel(repository, search, page, type) as T
     }
 
 }

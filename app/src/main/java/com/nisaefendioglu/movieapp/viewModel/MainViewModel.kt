@@ -22,8 +22,6 @@ class MainViewModel(
 
     init {
         repository.getData(search, page, type)
-        repository.getDataDetail(search, page, type)
-
         repository.movieErrorLiveData.observeForever {
             showLoader.value = false
         }
@@ -35,7 +33,7 @@ class MainViewModel(
                 _showsLiveData.value = it.search
                 isLastPage = (it.totalResults?.toInt() ?: 0) <= dataList.size
             }.run {
-                Log.d("Show data",Unit.toString())
+                Log.d("Show data", Unit.toString())
             }
         }
     }
@@ -44,7 +42,6 @@ class MainViewModel(
         if (!isLoading() && !isLastPage()) {
             showLoader.value = true
             repository.getData(search, page, type)
-            repository.getDataDetail(search, page, type)
         }
     }
 

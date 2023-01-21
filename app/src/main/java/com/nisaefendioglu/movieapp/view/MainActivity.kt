@@ -5,7 +5,6 @@ import android.view.KeyEvent
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.BindingAdapter
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -34,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         MovieAdapter(itemObject)
     }
 
-    private val omDBLayoutManager by lazy {
+    private val movieLayoutManager by lazy {
         LinearLayoutManager(this@MainActivity, LinearLayoutManager.HORIZONTAL, false)
     }
 
@@ -106,9 +105,10 @@ class MainActivity : AppCompatActivity() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
 
-                val visibleItemCount = omDBLayoutManager.childCount
-                val totalItemCount = omDBLayoutManager.itemCount
-                val firstVisibleItemPosition: Int = omDBLayoutManager.findFirstVisibleItemPosition()
+                val visibleItemCount = movieLayoutManager.childCount
+                val totalItemCount = movieLayoutManager.itemCount
+                val firstVisibleItemPosition: Int =
+                    movieLayoutManager.findFirstVisibleItemPosition()
 
                 if (!isLoading() && !isLastPage()) {
                     if (visibleItemCount + firstVisibleItemPosition >= totalItemCount
@@ -118,7 +118,7 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
             }
-        });
+        })
 
     }
 

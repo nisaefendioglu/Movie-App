@@ -1,5 +1,6 @@
 package com.nisaefendioglu.movieapp.adapters
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -17,8 +18,7 @@ class MovieAdapter(private val itemModel: MutableList<DataModel>) :
         RecyclerView.ViewHolder(viewDataBinding.root)
 
     override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
+        parent: ViewGroup, viewType: Int
     ): MyViewHolder {
         val binding =
             ItemRecyclerBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -40,6 +40,7 @@ class MovieAdapter(private val itemModel: MutableList<DataModel>) :
         return itemModel.size
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun updateData(list: List<DataModel>?, clear: Boolean = false) {
         list?.let {
             if (clear) {
