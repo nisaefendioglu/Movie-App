@@ -11,14 +11,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.nisaefendioglu.movieapp.R
 import com.nisaefendioglu.movieapp.adapters.MovieAdapter
-import com.nisaefendioglu.movieapp.api.helper.ApiClient
 import com.nisaefendioglu.movieapp.model.DataModel
-import com.nisaefendioglu.movieapp.api.ApiService
 import com.nisaefendioglu.movieapp.databinding.ActivityMainBinding
+import com.nisaefendioglu.movieapp.api.HiltModules
 import com.nisaefendioglu.movieapp.repository.MovieRepository
 import com.nisaefendioglu.movieapp.viewModel.MainViewModel
 import com.nisaefendioglu.movieapp.viewModel.MainViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
@@ -41,7 +42,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-        val apiService = ApiClient.getInstance().create(ApiService::class.java)
+        val apiService = HiltModules.provideRetrofitInterface()
         val repository = MovieRepository(apiService)
         viewModel = ViewModelProvider(
             this,
