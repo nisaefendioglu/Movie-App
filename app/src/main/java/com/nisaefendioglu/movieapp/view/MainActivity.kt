@@ -45,8 +45,7 @@ class MainActivity : AppCompatActivity() {
         val apiService = HiltModules.provideRetrofitInterface()
         val repository = MovieRepository(apiService)
         viewModel = ViewModelProvider(
-            this,
-            MainViewModelFactory(repository, searchText, page, contentType)
+            this, MainViewModelFactory(repository, searchText, page, contentType)
         )[MainViewModel::class.java]
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
@@ -54,26 +53,6 @@ class MainActivity : AppCompatActivity() {
         viewModel.showsLiveData.observe(this) {
             viewModel.showLoader.value = false
             movieAdapter.updateData(it, page == 1)
-        }
-
-        binding.homeGridRecycler.apply {
-            adapter = movieAdapter
-            layoutManager = LinearLayoutManager(
-                this@MainActivity, LinearLayoutManager.HORIZONTAL,
-                false
-            )
-
-            setHasFixedSize(true)
-        }
-
-        binding.homeGridRecycler2.apply {
-            adapter = movieAdapter
-            layoutManager = LinearLayoutManager(
-                this@MainActivity, LinearLayoutManager.HORIZONTAL,
-                false
-            )
-
-            setHasFixedSize(true)
         }
 
         movieAdapter.onItemClick = {
@@ -112,14 +91,29 @@ class MainActivity : AppCompatActivity() {
                     movieLayoutManager.findFirstVisibleItemPosition()
 
                 if (!isLoading() && !isLastPage()) {
-                    if (visibleItemCount + firstVisibleItemPosition >= totalItemCount
-                        && firstVisibleItemPosition >= 0
-                    ) {
+                    if (visibleItemCount + firstVisibleItemPosition >= totalItemCount && firstVisibleItemPosition >= 0) {
                         loadMoreItems()
                     }
                 }
             }
         })
+
+        binding.homeGridRecycler.apply {
+            adapter = movieAdapter
+            layoutManager = LinearLayoutManager(
+                this@MainActivity, LinearLayoutManager.HORIZONTAL, false
+            )
+            setHasFixedSize(true)
+        }
+
+        binding.homeGridRecycler2.apply {
+            adapter = movieAdapter
+            layoutManager = LinearLayoutManager(
+                this@MainActivity, LinearLayoutManager.HORIZONTAL, false
+            )
+
+            setHasFixedSize(true)
+        }
 
     }
 
